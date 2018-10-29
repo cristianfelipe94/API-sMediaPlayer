@@ -1,9 +1,103 @@
-html {
-text-align: center;
+body {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: linear-gradient(to bottom right, #b85de3, #47188b);
+  color: white;
+  font-size: 1em;
+}
+
+.clearFix {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+.searchWrapper {
+  width: 80vw;
+  height: 10vh;
+  border: 1px solid black;
+  margin: 0 auto;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 2%;
+  font-size: 1.2em;
+}
+
+#inputSearch {
+  width: 30vw;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+#btnSearch {
+  width: 10vw;
+  background-color: #37bbf3;
+  border-radius: 50px;
+  color: white;
+  border: 0;
+}
+
+.bandTitleWrapper {
+  width: 25vw;
+  height: 4vh;
+  margin: 1% auto;
+  padding: 1%;
+}
+
+.infoWrapper {
+  width: 15vw;
+  height: auto;
+  border: 1px solid black;
+  margin: 2vh 0 2vh 8vw;
+  background-color: #f5f5f5;
+  color: black;
+  border-radius: 10px;
+  padding: 2%;
+}
+
+.infoContent, .infoSimilar, .infoStats {
+  width: 60vw;
+  position: relative;
+  bottom: 75%;
+  left: 19vw;
+  display: none;
+  border-bottom: 2px solid white;
+}
+
+.tabInfoContent {
+  height: 5vh;
+  width: 15vw;
+  &:hover > .infoContent {
+    display: block;
+  }
+}
+
+.tabInfoSimilar {
+  height: 5vh;
+  width: 15vw;
+  &:hover > .infoSimilar {
+    display: block;
+  }
+}
+
+.tabInfoStats {
+  height: 5vh;
+  width: 15vw;
+  &:hover > .infoStats {
+    display: block;
+  }
+}
+
+.imgItem {
+  width: 100%;
 }
 
 .image {
-  height: 400px;
-  width: 400px;
+  mix-blend-mode: multiply;
+  height: auto;
+  width: 40vw;
+  min-width: 250px;
   background-color:black;
 }

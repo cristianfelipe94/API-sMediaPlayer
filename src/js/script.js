@@ -7,7 +7,9 @@ const request = new XMLHttpRequest();
 request.addEventListener('load', function (event) {
   // Get the Elements from the DOM.
   const btn = document.getElementById('btnSearch');
-  const list = document.getElementById('infoBlock');
+  const bioBlock = document.getElementById('infoContentBlock');
+  const similarBlock = document.getElementById('infoSimilarBlock');
+  const statsBlock = document.getElementById('infoStatsBlock');
   const imgList = document.getElementById('imgBlock');
   const bandtitle = document.getElementById('bandName');
 
@@ -26,10 +28,26 @@ request.addEventListener('load', function (event) {
   // Create the Element P to store information from the API.
   // To access the API bio information from the band.
   // Add the Bio info to the Container on the DOM.
-  const listItem = document.createElement('p');
-  listItem.innerHTML = response.artist.bio.content;
-  titleArtist.setAttribute('id', 'bandContent');
-  list.appendChild(listItem);
+  const contentBio = document.createElement('p');
+  contentBio.innerHTML = response.artist.bio.content;
+  contentBio.setAttribute('id', 'bandContent');
+  bioBlock.appendChild(contentBio);
+
+  // Create the Element P to store information from the API.
+  // To access the API bio information from the band.
+  // Add the Bio info to the Container on the DOM.
+  const contentSimilar = document.createElement('p');
+  contentSimilar.innerHTML = response.artist.similar.artist['0'].name;
+  contentSimilar.setAttribute('id', 'bandSimilarContent');
+  similarBlock.appendChild(contentSimilar);
+
+  // Create the Element P to store information from the API.
+  // To access the API bio information from the band.
+  // Add the Bio info to the Container on the DOM.
+  const contentStats = document.createElement('p');
+  contentStats.innerHTML = response.artist.stats.listeners;
+  contentStats.setAttribute('id', 'bandStatsContent');
+  statsBlock.appendChild(contentStats);
 
   // Create the Element IMG to store information from the API.
   // To access the API images.
@@ -55,10 +73,20 @@ let searchUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=
 function searchEngine() {
   // Get the Input DOM elements.
   const bar = document.getElementById('inputSearch');
+  const bioBlock = document.getElementById('infoContentBlock');
+  const similarBlock = document.getElementById('infoSimilarBlock');
+  const statsBlock = document.getElementById('infoStatsBlock');
+  const imgList = document.getElementById('imgBlock');
+  const bandtitle = document.getElementById('bandName');
 
   if (bar.value !== '') {
     artist = bar.value;
     bar.value = '';
+    bioBlock.innerHTML = ('');
+    similarBlock.innerHTML = ('');
+    statsBlock.innerHTML = ('');
+    imgList.innerHTML = ('');
+    bandtitle.innerHTML = ('');
     searchUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=ec6b87893ed99918950286ecdc97bf34&format=json`;
     // Request GET from the API Key.
     // API Key: ec6b87893ed99918950286ecdc97bf34.

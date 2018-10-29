@@ -11,18 +11,36 @@
 
 <body>
 
-  <div id="bandName">
-  </div>
-
-  <div id="infoBlock">
-  </div>
-
-  <div id="imgBlock">
-  </div>
-
-  <div id="inputBlock">
+  <div id="inputBlock" class="searchWrapper">
     <input type="text" id="inputSearch">
     <input type="button" value="Search" id="btnSearch">
+
+    <div id="bandName" class="bandTitleWrapper">
+    </div>
+  </div>
+
+ 
+
+  <div class="infoWrapper clearFix">
+
+    <div class="tabInfoSimilar"><span>Info Similar</span>
+      <div id="infoSimilarBlock" class="infoSimilar">
+      </div>
+    </div>
+
+    <div class="tabInfoStats"><span>Info Stats</span>
+      <div id="infoStatsBlock" class="infoStats">
+      </div>
+    </div>
+
+    <div class="tabInfoContent"><span>Info Content</span>
+      <div id="infoContentBlock" class="infoContent">
+      </div>
+    </div>
+    
+  </div>
+
+  <div id="imgBlock" class="imgItem">
   </div>
 
   <footer>
