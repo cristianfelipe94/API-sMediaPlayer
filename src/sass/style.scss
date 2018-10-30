@@ -4,12 +4,49 @@ body {
   text-align: center;
   height: 100vh;
   width: 100vw;
-  background-image: linear-gradient(to bottom right, #b85de3, #47188b);
   color: white;
   font-size: 1em;
   font-family: 'Oswald', sans-serif;
   overflow: hidden;
   margin: 2vh auto;
+  animation: backgroundColorChanges 60s infinite;
+  transition: background-image 0.5s;
+}
+
+@keyframes backgroundColorChanges {
+  0%{
+    background-image: linear-gradient(to bottom right, #b85de3, #47188b);
+  }
+  10%{
+    background-image: linear-gradient(to top left, #7b4397, #dc2430);
+  }
+  20%{
+    background-image: linear-gradient(to bottom right, #ff0084, #33001b);
+  }
+  30%{
+    background-image: linear-gradient(to top left, #FEAC5E, #C779D0);
+  }
+  40%{
+    background-image: linear-gradient(to bottom right, #43cea2, #185a9d);
+  }
+  50%{
+    background-image: linear-gradient(to top left, #b3ffab, #12fff7);
+  }
+  60%{
+    background-image: linear-gradient(to bottom right, #556270,#ff6b6b);
+  }
+  70%{
+    background-image: linear-gradient(to top left, #D38312, #A83279);
+  }
+  80%{
+    background-image: linear-gradient(to bottom right,#fbd3e9, #bb377d);
+  }
+  90%{
+    background-image: linear-gradient(to top left, #c9ffbf, #ffafbd);
+  }
+  100%{
+    background-image: linear-gradient(to bottom right, #70e1f5, #ffd194);
+  }
 }
 
 //Search Styles.
@@ -24,6 +61,11 @@ body {
   border-radius: 10px;
   padding: 2%;
   font-size: 1.2em;
+  &:hover {
+    background-color:#d4d3dd;
+    transition: 0.8s background-color;
+
+  }
 }
 
 #inputSearch {
@@ -57,6 +99,12 @@ body {
   padding: 1%;
 }
 
+#bandTitle:hover {
+  color: #37bbf3;
+  transition: 0.8s color;
+  cursor: pointer;
+}
+
 //Images Styles.
 ////////////////
 .imgWrapper {
@@ -68,6 +116,10 @@ body {
   height: auto;
   width: 25vw;
   border-radius: 5px;
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.7s;
+  }
 }
 
 .imageContainer {
