@@ -8,8 +8,9 @@ request.addEventListener('load', function (event) {
   // Get the Elements from the DOM.
   const btn = document.getElementById('btnSearch');
   const bioBlock = document.getElementById('infoContentBlock');
-  const similarBlock = document.getElementById('infoSimilarBlock');
   const statsBlock = document.getElementById('infoStatsBlock');
+  const similarArtistImgFirst = document.getElementById('imgBlockSimilarArtistFirst');
+  const similarArtistImgTwo = document.getElementById('imgBlockSimilarArtistTwo');
   const imgList = document.getElementById('imgBlock');
   const bandtitle = document.getElementById('bandName');
 
@@ -36,16 +37,10 @@ request.addEventListener('load', function (event) {
   // Create the Element P to store information from the API.
   // To access the API bio information from the band.
   // Add the Bio info to the Container on the DOM.
-  const contentSimilar = document.createElement('p');
-  contentSimilar.innerHTML = response.artist.similar.artist['0'].name;
-  contentSimilar.setAttribute('id', 'bandSimilarContent');
-  similarBlock.appendChild(contentSimilar);
-
-  // Create the Element P to store information from the API.
-  // To access the API bio information from the band.
-  // Add the Bio info to the Container on the DOM.
   const contentStats = document.createElement('p');
-  contentStats.innerHTML = response.artist.stats.listeners;
+  const listenerStats = response.artist.stats.listeners;
+  const playCounterStats = response.artist.stats.playcount;
+  contentStats.innerHTML = `Band listeners: ${listenerStats} Band PlayCount: ${playCounterStats}`;
   contentStats.setAttribute('id', 'bandStatsContent');
   statsBlock.appendChild(contentStats);
 
@@ -53,10 +48,40 @@ request.addEventListener('load', function (event) {
   // To access the API images.
   // Add the Image to the Container on the DOM.
   const imgArtist = document.createElement('img');
+  const imgArtistName = document.createElement('p');
   imgArtist.setAttribute('class', 'image');
-  imgArtist.setAttribute('id', 'bandImg');
+  imgArtistName.setAttribute('class', 'artistBlockName');
+  imgList.setAttribute('class', 'imageContainer');
   imgArtist.setAttribute('src', response.artist.image[5]['#text']);
+  imgArtistName.innerHTML = response.artist.name;
   imgList.appendChild(imgArtist);
+  imgList.appendChild(imgArtistName);
+
+  // Create the Element IMG to store information from the API.
+  // To access the API images.
+  // Add the Image to the Container on the DOM.
+  const imgSimilarFirstArtist = document.createElement('img');
+  const imgSimilarFirstArtistName = document.createElement('p');
+  imgSimilarFirstArtist.setAttribute('class', 'image');
+  imgSimilarFirstArtistName.setAttribute('class', 'artistBlockName');
+  similarArtistImgFirst.setAttribute('class', 'imageContainer');
+  imgSimilarFirstArtist.setAttribute('src', response.artist.similar.artist['0'].image[5]['#text']);
+  imgSimilarFirstArtistName.innerHTML = response.artist.similar.artist['0'].name;
+  similarArtistImgFirst.appendChild(imgSimilarFirstArtist);
+  similarArtistImgFirst.appendChild(imgSimilarFirstArtistName);
+
+  // Create the Element IMG to store information from the API.
+  // To access the API images.
+  // Add the Image to the Container on the DOM.
+  const imgSimilarSecondArtist = document.createElement('img');
+  const imgSimilarSecondArtistName = document.createElement('p');
+  imgSimilarSecondArtist.setAttribute('class', 'image');
+  imgSimilarSecondArtistName.setAttribute('class', 'artistBlockName');
+  similarArtistImgTwo.setAttribute('class', 'imageContainer');
+  imgSimilarSecondArtist.setAttribute('src', response.artist.similar.artist['1'].image[5]['#text']);
+  imgSimilarSecondArtistName.innerHTML = response.artist.similar.artist['1'].name;
+  similarArtistImgTwo.appendChild(imgSimilarSecondArtist);
+  similarArtistImgTwo.appendChild(imgSimilarSecondArtistName);
 
   // Add the Function to the Btn.
   // Event will start Search Engine.
@@ -74,17 +99,19 @@ function searchEngine() {
   // Get the Input DOM elements.
   const bar = document.getElementById('inputSearch');
   const bioBlock = document.getElementById('infoContentBlock');
-  const similarBlock = document.getElementById('infoSimilarBlock');
   const statsBlock = document.getElementById('infoStatsBlock');
   const imgList = document.getElementById('imgBlock');
+  const similarArtistImgFirst = document.getElementById('imgBlockSimilarArtistFirst');
+  const similarArtistImgTwo = document.getElementById('imgBlockSimilarArtistTwo');
   const bandtitle = document.getElementById('bandName');
 
   if (bar.value !== '') {
     artist = bar.value;
     bar.value = '';
     bioBlock.innerHTML = ('');
-    similarBlock.innerHTML = ('');
     statsBlock.innerHTML = ('');
+    similarArtistImgFirst.innerHTML = ('');
+    similarArtistImgTwo.innerHTML = ('');
     imgList.innerHTML = ('');
     bandtitle.innerHTML = ('');
     searchUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=ec6b87893ed99918950286ecdc97bf34&format=json`;

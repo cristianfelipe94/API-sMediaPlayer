@@ -1,3 +1,5 @@
+//Body Styles.
+//////////////
 body {
   text-align: center;
   height: 100vh;
@@ -5,14 +7,13 @@ body {
   background-image: linear-gradient(to bottom right, #b85de3, #47188b);
   color: white;
   font-size: 1em;
+  font-family: 'Oswald', sans-serif;
+  overflow: hidden;
+  margin: 2vh;
 }
 
-.clearFix {
-  clear: both;
-  content: "";
-  display: block;
-}
-
+//Search Styles.
+////////////////
 .searchWrapper {
   width: 80vw;
   height: 10vh;
@@ -33,12 +34,17 @@ body {
 
 #btnSearch {
   width: 10vw;
+  font-size: 0.7em;
   background-color: #37bbf3;
   border-radius: 50px;
   color: white;
   border: 0;
+  font-family: 'Oswald', sans-serif;
+  font-weight: lighter;
 }
 
+//Title Band Styles.
+////////////////
 .bandTitleWrapper {
   width: 25vw;
   height: 4vh;
@@ -46,58 +52,93 @@ body {
   padding: 1%;
 }
 
-.infoWrapper {
-  width: 15vw;
+//Images Styles.
+////////////////
+.imgWrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.image {
   height: auto;
+  width: 25vw;
+  border-radius: 5px;
+}
+
+.imageContainer {
+  display: inline-block;
+  margin: 2vh 10px;
+}
+
+.artistBlockName {
+  background-color: white;
+  height: 2vh;
+  margin: 0;
+  padding: 4%;
+  color: black;
+  border-radius: 5px;  
+}
+
+//Content Styles.
+/////////////////
+.infoWrapper {
+  width: 10vw;
+  height: 8vh;
   border: 1px solid black;
   margin: 2vh 0 2vh 8vw;
   background-color: #f5f5f5;
   color: black;
   border-radius: 10px;
-  padding: 2%;
 }
 
-.infoContent, .infoSimilar, .infoStats {
+.infoContent {
+  width: 70vw;
+  overflow-x: hidden;
+  height: 30vh;
+  position: relative;
+  bottom: 50%;
+  left: 10vw;
+  padding: 10px;
+  display: none;
+  border-bottom: 2px solid white;
+}
+
+.infoStats {
   width: 60vw;
   position: relative;
-  bottom: 75%;
-  left: 19vw;
+  bottom: 9vh;
+  left: 11vw;
+  padding: 10px;
   display: none;
   border-bottom: 2px solid white;
 }
 
 .tabInfoContent {
   height: 5vh;
-  width: 15vw;
+  width: 10vw;
   &:hover > .infoContent {
-    display: block;
-  }
-}
-
-.tabInfoSimilar {
-  height: 5vh;
-  width: 15vw;
-  &:hover > .infoSimilar {
     display: block;
   }
 }
 
 .tabInfoStats {
   height: 5vh;
-  width: 15vw;
+  width: 10vw;
   &:hover > .infoStats {
     display: block;
   }
 }
 
-.imgItem {
-  width: 100%;
-}
-
-.image {
-  mix-blend-mode: multiply;
-  height: auto;
-  width: 40vw;
-  min-width: 250px;
-  background-color:black;
+//Footer Styles.
+////////////////
+.footerWrapper {
+  width: 90vw;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 2px solid white;
+  background-color: #7840ae;
+  margin-bottom: 2vh;
 }
