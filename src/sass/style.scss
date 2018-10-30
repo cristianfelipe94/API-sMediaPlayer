@@ -9,7 +9,7 @@ body {
   font-size: 1em;
   font-family: 'Oswald', sans-serif;
   overflow: hidden;
-  margin: 2vh;
+  margin: 2vh auto;
 }
 
 //Search Styles.
@@ -41,6 +41,11 @@ body {
   border: 0;
   font-family: 'Oswald', sans-serif;
   font-weight: lighter;
+  cursor: pointer;
+  &:hover {
+    background-color: #39def2;
+    transition: 0.8s background-color;
+  }
 }
 
 //Title Band Styles.
@@ -76,7 +81,12 @@ body {
   margin: 0;
   padding: 4%;
   color: black;
-  border-radius: 5px;  
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    color: #37bbf3;
+    transition: 0.5s color;
+  } 
 }
 
 //Content Styles.
@@ -89,6 +99,7 @@ body {
   background-color: #f5f5f5;
   color: black;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .infoContent {
@@ -116,6 +127,10 @@ body {
 .tabInfoContent {
   height: 5vh;
   width: 10vw;
+  &:hover span {
+    color: #37bbf3;
+    transition: 0.5s color;
+  }
   &:hover > .infoContent {
     display: block;
   }
@@ -124,6 +139,10 @@ body {
 .tabInfoStats {
   height: 5vh;
   width: 10vw;
+  &:hover span {
+    color: #37bbf3;
+    transition: 0.5s color;
+  }
   &:hover > .infoStats {
     display: block;
   }
@@ -138,7 +157,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  border: 2px solid white;
+  border: 1px solid white;
   background-color: #7840ae;
   margin-bottom: 2vh;
 }

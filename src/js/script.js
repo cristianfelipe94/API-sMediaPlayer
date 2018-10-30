@@ -86,6 +86,8 @@ request.addEventListener('load', function (event) {
   // Add the Function to the Btn.
   // Event will start Search Engine.
   btn.addEventListener('click', searchEngine);
+  imgSimilarSecondArtistName.addEventListener('click', searchSimilarArtist);
+  imgSimilarFirstArtistName.addEventListener('click', searchSimilarArtist);
 });
 
 // Response the system is waiting.
@@ -121,6 +123,31 @@ function searchEngine() {
     // Sent the Request.
     request.send();
   }
+}
+
+function searchSimilarArtist(event) {
+  // Get the Input DOM elements.
+  const bar = document.getElementById('inputSearch');
+  const bioBlock = document.getElementById('infoContentBlock');
+  const statsBlock = document.getElementById('infoStatsBlock');
+  const imgList = document.getElementById('imgBlock');
+  const similarArtistImgFirst = document.getElementById('imgBlockSimilarArtistFirst');
+  const similarArtistImgTwo = document.getElementById('imgBlockSimilarArtistTwo');
+  const bandtitle = document.getElementById('bandName');
+  artist = event.target.innerHTML;
+  bar.value = '';
+  bioBlock.innerHTML = ('');
+  statsBlock.innerHTML = ('');
+  similarArtistImgFirst.innerHTML = ('');
+  similarArtistImgTwo.innerHTML = ('');
+  imgList.innerHTML = ('');
+  bandtitle.innerHTML = ('');
+  searchUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=ec6b87893ed99918950286ecdc97bf34&format=json`;
+  // Request GET from the API Key.
+  // API Key: ec6b87893ed99918950286ecdc97bf34.
+  request.open('GET', searchUrl);
+  // Sent the Request.
+  request.send();
 }
 
 // Request GET from the API Key.
