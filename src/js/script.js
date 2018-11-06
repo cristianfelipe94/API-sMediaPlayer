@@ -97,6 +97,12 @@ let artist = 'sticky+fingers';
 
 let searchUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=ec6b87893ed99918950286ecdc97bf34&format=json`;
 
+// Request GET from the API Key.
+// API Key: ec6b87893ed99918950286ecdc97bf34.
+request.open('GET', searchUrl);
+// Sent the Request.
+request.send();
+
 function searchEngine() {
   // Get the Input DOM elements.
   const bar = document.getElementById('inputSearch');
@@ -150,8 +156,34 @@ function searchSimilarArtist(event) {
   request.send();
 }
 
-// Request GET from the API Key.
-// API Key: ec6b87893ed99918950286ecdc97bf34.
-request.open('GET', searchUrl);
-// Sent the Request.
-request.send();
+const bar = document.getElementById('inputSearch');
+bar.oninput = () => {
+  // Create the XMLHttpRequest.
+  const requestPredict = new XMLHttpRequest();
+  requestPredict.addEventListener('load', function (event) {
+    // Response from the Load event.
+    const responsePredict = event.target.response;
+    console.log(responsePredict);
+    const responseArrayPredict = [
+      responsePredict.results.artistmatches.artist['0'].name,
+      responsePredict.results.artistmatches.artist['1'].name,
+      responsePredict.results.artistmatches.artist['2'].name,
+      responsePredict.results.artistmatches.artist['3'].name,
+    ];
+    responseArrayPredict.forEach(function (element) {
+      console.log(element);
+    });
+  });
+  const contentBar = bar.value;
+  const searchPredict = `http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${contentBar}&limit=4&api_key=ec6b87893ed99918950286ecdc97bf34&format=json`;
+
+  // Response the system is waiting.
+  requestPredict.responseType = 'json';
+
+  // Request GET from the API Key.
+  // API Key: ec6b87893ed99918950286ecdc97bf34.
+  requestPredict.open('GET', searchPredict);
+
+  // Sent the Request.
+  requestPredict.send();
+};
