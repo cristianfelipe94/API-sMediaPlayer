@@ -67,6 +67,44 @@ body {
   }
 }
 
+#wrapperSearchBar {
+  width: 31vw;
+  display: inline-block;
+  &:hover > .responseStyleWrapper {
+    display: block;
+  }
+}
+
+.responseStyleWrapper {
+  width: 100%;
+  background-color: white;
+  opacity: 0.93;
+  color: black;
+  padding: 1px;
+  border-bottom: 2px solid gray;
+  display: none;
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    background-color: #12fff7;
+  }
+}
+
+.responseStyleElement {
+  width: 100%;
+  background-color: white;
+  opacity: 0.93;
+  color: black;
+  padding: 0;
+}
+
+.btnsContainer {
+  display: inline-block;
+  margin: 0 auto;
+  padding-top: 1vh;
+  position: relative;
+}
+
 #inputSearch {
   width: 30vw;
   background-color: #f5f5f5;
@@ -74,7 +112,7 @@ body {
 }
 
 #btnSearch {
-  width: 10vw;
+  width: 6vw;
   font-size: 0.7em;
   background-color: #37bbf3;
   border-radius: 50px;
@@ -83,19 +121,33 @@ body {
   font-family: 'Oswald', sans-serif;
   font-weight: lighter;
   cursor: pointer;
+  position: absolute;
+  margin: 14px;
   &:hover {
     background-color: #39def2;
     transition: 0.8s background-color;
   }
 }
 
+.killed {
+  display: none;
+}
+
 //Title Band Styles.
 ////////////////
 .bandTitleWrapper {
-  width: 25vw;
+  width: 40vw;
   height: 4vh;
   margin: 1% auto;
-  padding: 1%;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  text-align: left;
+}
+
+#bandTitle {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
 }
 
 #bandTitle:hover {
@@ -208,7 +260,10 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  color: #185a9d;
   border: 1px solid white;
-  background-color: #7840ae;
   margin-bottom: 2vh;
+  opacity: 0.8;
+  cursor: pointer;
+  background-color: #12fff7;
 }

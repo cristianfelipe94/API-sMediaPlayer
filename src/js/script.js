@@ -160,7 +160,7 @@ const bar = document.getElementById('inputSearch');
 bar.oninput = () => {
   // Create the XMLHttpRequest.
   const requestPredict = new XMLHttpRequest();
-  requestPredict.addEventListener('load', function (event) {
+  requestPredict.addEventListener('load', function loadResponse(event) {
     // Response from the Load event.
     const responsePredict = event.target.response;
     console.log(responsePredict);
@@ -170,8 +170,25 @@ bar.oninput = () => {
       responsePredict.results.artistmatches.artist['2'].name,
       responsePredict.results.artistmatches.artist['3'].name,
     ];
+    responseArrayPredict.forEach(function () {
+      const responseElementClear = document.getElementsByClassName('responseStyleElement');
+      for (const e of responseElementClear) {
+        e.setAttribute('class', 'killed');
+      }
+      const responseWrapperClear = document.getElementsByClassName('responseStyleWrapper');
+      for (const i of responseWrapperClear) {
+        i.setAttribute('class', 'killed');
+      }
+    });
     responseArrayPredict.forEach(function (element) {
-      console.log(element);
+      const responseWrapperPredict = document.getElementById('wrapperSearchBar');
+      const responseContainerPredict = document.createElement('div');
+      const responseElementPredict = document.createElement('p');
+      responseElementPredict.setAttribute('class', 'responseStyleElement');
+      responseContainerPredict.setAttribute('class', 'responseStyleWrapper');
+      responseElementPredict.innerHTML = element;
+      responseContainerPredict.appendChild(responseElementPredict);
+      responseWrapperPredict.appendChild(responseContainerPredict);
     });
   });
   const contentBar = bar.value;
