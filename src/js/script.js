@@ -189,6 +189,101 @@ bar.oninput = () => {
       responseElementPredict.innerHTML = element;
       responseContainerPredict.appendChild(responseElementPredict);
       responseWrapperPredict.appendChild(responseContainerPredict);
+      responseElementPredict.addEventListener('click', function (eventPredictArtist) {
+        // Create the XMLHttpRequest.
+        const requestPredictArtist = new XMLHttpRequest();
+        requestPredictArtist.addEventListener('load', function () {
+          // Get the Input DOM elements.
+          const barPredictArtist = document.getElementById('inputSearch');
+          const bioBlock = document.getElementById('infoContentBlock');
+          const statsBlock = document.getElementById('infoStatsBlock');
+          const imgList = document.getElementById('imgBlock');
+          const similarArtistImgFirst = document.getElementById('imgBlockSimilarArtistFirst');
+          const similarArtistImgTwo = document.getElementById('imgBlockSimilarArtistTwo');
+          const bandtitle = document.getElementById('bandName');
+          artist = eventPredictArtist.target.innerHTML;
+          console.log(artist);
+          const responsePredict = eventPredictArtist.target.response;
+          console.log(responsePredict);
+          barPredictArtist.value = '';
+          bioBlock.innerHTML = ('');
+          statsBlock.innerHTML = ('');
+          similarArtistImgFirst.innerHTML = ('');
+          similarArtistImgTwo.innerHTML = ('');
+          imgList.innerHTML = ('');
+          bandtitle.innerHTML = ('');
+          // Create the Element P to store information from the API.
+          // To access the API artist name.
+          // Add the Name to the Container on the DOM.
+          const titleArtist = document.createElement('p');
+          titleArtist.innerHTML = responsePredict.artist.name;
+          titleArtist.setAttribute('id', 'bandTitle');
+          bandtitle.appendChild(titleArtist);
+
+          // Create the Element P to store information from the API.
+          // To access the API bio information from the band.
+          // Add the Bio info to the Container on the DOM.
+          const contentBio = document.createElement('p');
+          contentBio.innerHTML = responsePredict.artist.bio.content;
+          contentBio.setAttribute('id', 'bandContent');
+          bioBlock.appendChild(contentBio);
+
+          // Create the Element P to store information from the API.
+          // To access the API bio information from the band.
+          // Add the Bio info to the Container on the DOM.
+          const contentStats = document.createElement('p');
+          const listenerStats = responsePredict.artist.stats.listeners;
+          const playCounterStats = responsePredict.artist.stats.playcount;
+          contentStats.innerHTML = `Band listeners: ${listenerStats} Band PlayCount: ${playCounterStats}`;
+          contentStats.setAttribute('id', 'bandStatsContent');
+          statsBlock.appendChild(contentStats);
+
+          // Create the Element IMG to store information from the API.
+          // To access the API images.
+          // Add the Image to the Container on the DOM.
+          const imgArtist = document.createElement('img');
+          const imgArtistName = document.createElement('p');
+          imgArtist.setAttribute('class', 'image');
+          imgArtistName.setAttribute('class', 'artistBlockName');
+          imgList.setAttribute('class', 'imageContainer');
+          imgArtist.setAttribute('src', responsePredict.artist.image[5]['#text']);
+          imgArtistName.innerHTML = responsePredict.artist.name;
+          imgList.appendChild(imgArtist);
+          imgList.appendChild(imgArtistName);
+
+          // Create the Element IMG to store information from the API.
+          // To access the API images.
+          // Add the Image to the Container on the DOM.
+          const imgSimilarFirstArtist = document.createElement('img');
+          const imgSimilarFirstArtistName = document.createElement('p');
+          imgSimilarFirstArtist.setAttribute('class', 'image');
+          imgSimilarFirstArtistName.setAttribute('class', 'artistBlockName');
+          similarArtistImgFirst.setAttribute('class', 'imageContainer');
+          imgSimilarFirstArtist.setAttribute('src', responsePredict.artist.similar.artist['0'].image[5]['#text']);
+          imgSimilarFirstArtistName.innerHTML = responsePredict.artist.similar.artist['0'].name;
+          similarArtistImgFirst.appendChild(imgSimilarFirstArtist);
+          similarArtistImgFirst.appendChild(imgSimilarFirstArtistName);
+
+          // Create the Element IMG to store information from the API.
+          // To access the API images.
+          // Add the Image to the Container on the DOM.
+          const imgSimilarSecondArtist = document.createElement('img');
+          const imgSimilarSecondArtistName = document.createElement('p');
+          imgSimilarSecondArtist.setAttribute('class', 'image');
+          imgSimilarSecondArtistName.setAttribute('class', 'artistBlockName');
+          similarArtistImgTwo.setAttribute('class', 'imageContainer');
+          imgSimilarSecondArtist.setAttribute('src', responsePredict.artist.similar.artist['1'].image[5]['#text']);
+          imgSimilarSecondArtistName.innerHTML = responsePredict.artist.similar.artist['1'].name;
+          similarArtistImgTwo.appendChild(imgSimilarSecondArtist);
+          similarArtistImgTwo.appendChild(imgSimilarSecondArtistName);
+        });
+        searchUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=ec6b87893ed99918950286ecdc97bf34&format=json`;
+        // Request GET from the API Key.
+        // API Key: ec6b87893ed99918950286ecdc97bf34.
+        requestPredictArtist.open('GET', searchUrl);
+        // Sent the Request.
+        requestPredictArtist.send();
+      });
     });
   });
   const contentBar = bar.value;
