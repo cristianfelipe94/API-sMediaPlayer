@@ -189,10 +189,10 @@ bar.oninput = () => {
       responseElementPredict.innerHTML = element;
       responseContainerPredict.appendChild(responseElementPredict);
       responseWrapperPredict.appendChild(responseContainerPredict);
-      responseElementPredict.addEventListener('click', function (eventPredictArtist) {
+      responseElementPredict.addEventListener('click', function () {
         // Create the XMLHttpRequest.
         const requestPredictArtist = new XMLHttpRequest();
-        requestPredictArtist.addEventListener('load', function () {
+        requestPredictArtist.addEventListener('load', function (eventPredictArtist) {
           // Get the Input DOM elements.
           const barPredictArtist = document.getElementById('inputSearch');
           const bioBlock = document.getElementById('infoContentBlock');
@@ -201,10 +201,14 @@ bar.oninput = () => {
           const similarArtistImgFirst = document.getElementById('imgBlockSimilarArtistFirst');
           const similarArtistImgTwo = document.getElementById('imgBlockSimilarArtistTwo');
           const bandtitle = document.getElementById('bandName');
-          artist = eventPredictArtist.target.innerHTML;
-          console.log(artist);
-          const responsePredict = eventPredictArtist.target.response;
-          console.log(responsePredict);
+
+          // Get response InnerHTML from Request.
+          // Console log response Content.
+          const artistPredict = eventPredictArtist.target.response;
+          console.log(artistPredict);
+          const artistPredictArtistName = artistPredict.artist.name;
+
+          // Clear information from Previous Artist.
           barPredictArtist.value = '';
           bioBlock.innerHTML = ('');
           statsBlock.innerHTML = ('');
@@ -212,11 +216,12 @@ bar.oninput = () => {
           similarArtistImgTwo.innerHTML = ('');
           imgList.innerHTML = ('');
           bandtitle.innerHTML = ('');
+
           // Create the Element P to store information from the API.
           // To access the API artist name.
           // Add the Name to the Container on the DOM.
           const titleArtist = document.createElement('p');
-          titleArtist.innerHTML = responsePredict.artist.name;
+          titleArtist.innerHTML = artistPredict.artist.name;
           titleArtist.setAttribute('id', 'bandTitle');
           bandtitle.appendChild(titleArtist);
 
@@ -224,7 +229,7 @@ bar.oninput = () => {
           // To access the API bio information from the band.
           // Add the Bio info to the Container on the DOM.
           const contentBio = document.createElement('p');
-          contentBio.innerHTML = responsePredict.artist.bio.content;
+          contentBio.innerHTML = artistPredict.artist.bio.content;
           contentBio.setAttribute('id', 'bandContent');
           bioBlock.appendChild(contentBio);
 
@@ -232,8 +237,8 @@ bar.oninput = () => {
           // To access the API bio information from the band.
           // Add the Bio info to the Container on the DOM.
           const contentStats = document.createElement('p');
-          const listenerStats = responsePredict.artist.stats.listeners;
-          const playCounterStats = responsePredict.artist.stats.playcount;
+          const listenerStats = artistPredict.artist.stats.listeners;
+          const playCounterStats = artistPredict.artist.stats.playcount;
           contentStats.innerHTML = `Band listeners: ${listenerStats} Band PlayCount: ${playCounterStats}`;
           contentStats.setAttribute('id', 'bandStatsContent');
           statsBlock.appendChild(contentStats);
@@ -246,8 +251,8 @@ bar.oninput = () => {
           imgArtist.setAttribute('class', 'image');
           imgArtistName.setAttribute('class', 'artistBlockName');
           imgList.setAttribute('class', 'imageContainer');
-          imgArtist.setAttribute('src', responsePredict.artist.image[5]['#text']);
-          imgArtistName.innerHTML = responsePredict.artist.name;
+          imgArtist.setAttribute('src', artistPredict.artist.image[5]['#text']);
+          imgArtistName.innerHTML = artistPredict.artist.name;
           imgList.appendChild(imgArtist);
           imgList.appendChild(imgArtistName);
 
@@ -259,8 +264,8 @@ bar.oninput = () => {
           imgSimilarFirstArtist.setAttribute('class', 'image');
           imgSimilarFirstArtistName.setAttribute('class', 'artistBlockName');
           similarArtistImgFirst.setAttribute('class', 'imageContainer');
-          imgSimilarFirstArtist.setAttribute('src', responsePredict.artist.similar.artist['0'].image[5]['#text']);
-          imgSimilarFirstArtistName.innerHTML = responsePredict.artist.similar.artist['0'].name;
+          imgSimilarFirstArtist.setAttribute('src', artistPredict.artist.similar.artist['0'].image[5]['#text']);
+          imgSimilarFirstArtistName.innerHTML = artistPredict.artist.similar.artist['0'].name;
           similarArtistImgFirst.appendChild(imgSimilarFirstArtist);
           similarArtistImgFirst.appendChild(imgSimilarFirstArtistName);
 
@@ -272,17 +277,20 @@ bar.oninput = () => {
           imgSimilarSecondArtist.setAttribute('class', 'image');
           imgSimilarSecondArtistName.setAttribute('class', 'artistBlockName');
           similarArtistImgTwo.setAttribute('class', 'imageContainer');
-          imgSimilarSecondArtist.setAttribute('src', responsePredict.artist.similar.artist['1'].image[5]['#text']);
-          imgSimilarSecondArtistName.innerHTML = responsePredict.artist.similar.artist['1'].name;
+          imgSimilarSecondArtist.setAttribute('src', artistPredict.artist.similar.artist['1'].image[5]['#text']);
+          imgSimilarSecondArtistName.innerHTML = artistPredict.artist.similar.artist['1'].name;
           similarArtistImgTwo.appendChild(imgSimilarSecondArtist);
           similarArtistImgTwo.appendChild(imgSimilarSecondArtistName);
+
+          const searchUrlPredictArtist = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artistPredictArtistName}&api_key=ec6b87893ed99918950286ecdc97bf34&format=json`;
+          // Response the system is waiting.
+          requestPredictArtist.responseType = 'json';
+          // Request GET from the API Key.
+          // API Key: ec6b87893ed99918950286ecdc97bf34.
+          requestPredictArtist.open('GET', searchUrlPredictArtist);
+          // Sent the Request.
+          requestPredictArtist.send();
         });
-        searchUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=ec6b87893ed99918950286ecdc97bf34&format=json`;
-        // Request GET from the API Key.
-        // API Key: ec6b87893ed99918950286ecdc97bf34.
-        requestPredictArtist.open('GET', searchUrl);
-        // Sent the Request.
-        requestPredictArtist.send();
       });
     });
   });
